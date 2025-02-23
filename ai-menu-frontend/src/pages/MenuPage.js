@@ -9,7 +9,7 @@ const MenuPage = () => {
     useEffect(() => {
         const fetchMenu = async () => {
             try {
-                const response = await axios.get("https://fd6c-2409-4041-6e98-bd86-56f-1107-4834-22f7.ngrok-free.app/menu/get");
+                const response = await axios.get("https://ai-menu-0xwb.onrender.com/menu/get");
                 console.log("Menu API Response:", response.data); // Debugging
                 setMenu(response.data.Menu || response.data); // Fix response structure
             } catch (error) {

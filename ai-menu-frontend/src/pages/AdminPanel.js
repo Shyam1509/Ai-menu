@@ -9,7 +9,8 @@ const AdminPanel = () => {
         if (!tableId) return alert("Please enter a Table ID");
 
         try {
-            const response = await axios.post("https://fd6c-2409-4041-6e98-bd86-56f-1107-4834-22f7.ngrok-free.app/generate-qr", { tableId });
+            const response = await axios.post("https://ai-menu-0xwb.onrender.com/generate-qr", { tableId })
+            console.log("response",response)
             setQrCode(response.data.qrCode);
         } catch (error) {
             console.error("Error generating QR code:", error);

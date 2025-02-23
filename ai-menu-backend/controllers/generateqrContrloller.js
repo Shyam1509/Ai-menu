@@ -8,9 +8,9 @@ exports.generateQRCode = async (req, res) => {
       return res.status(400).json({ error: "Table ID is required" });
     }
 
-    const qrData = `https://9085-2409-4041-6e98-bd86-8199-1a3c-6c21-39f8.ngrok-free.app/menu/${tableId}`; // Replace with your actual URL
+    const qrData = `https://f921-114-29-229-155.ngrok-free.app/menu/${tableId}`; // Replace with your actual URL
     const qrCode = await QRCode.toDataURL(qrData);
-
+    console.log()
     res.status(200).json({ tableId, qrCode });
   } catch (error) {
     console.error("❌ Error generating QR Code:", error);
