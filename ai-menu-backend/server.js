@@ -10,8 +10,7 @@ const server = express();
 
 // Middleware
 server.use(express.json());
-const cors = require("cors");
-app.use(cors({ origin: "*" })); // Allow all origins (for testing)
+server.use(cors({ origin: "*" })); // Allow all origins (for testing)
 
 
 // Connect Database
