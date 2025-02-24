@@ -13,13 +13,13 @@ server.use(express.json());
 server.use(cors({ origin: "*" })); // Allow all origins (for testing)
 
 
-// Connect Database
-connectDB();
-
 // Routes
 server.use("/menu", menuRoutes);
 server.use("/generate-qr", generateqr);
 
 
 // Start Server
-server.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+server.listen(PORT, () => 
+    console.log(`🚀 Server running on port ${PORT}`),
+    connectDB()
+);
