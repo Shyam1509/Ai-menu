@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGOURL, {
+    const conn = await mongoose.connect(process.env.MONGOURL + "/ai-menu", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
