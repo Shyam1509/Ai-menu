@@ -8,7 +8,7 @@ exports.generateQRCode = async (req, res) => {
       return res.status(400).json({ error: "Table ID is required" });
     }
 
-    const qrData = `https://f921-114-29-229-155.ngrok-free.app/menu/${tableId}`; // Replace with your actual URL
+    const qrData = `https://ai-menu-omega.vercel.app/menu/${tableId}`; // Replace with your actual URL
     const qrCode = await QRCode.toDataURL(qrData);
     console.log()
     res.status(200).json({ tableId, qrCode });
