@@ -11,7 +11,7 @@ const MenuPage = () => {
         const fetchMenu = async () => {
             try {
                 const response = await axios.get("https://ai-menu-0xwb.onrender.com/menu/get");
-                console.log("Menu API Response:", response.data);
+                console.log("Menu API Response:", response.data); // Debugging
                 setMenu(response.data.Menu || response.data);
             } catch (error) {
                 console.error("Error fetching menu:", error);
@@ -26,26 +26,49 @@ const MenuPage = () => {
     };
 
     return (
-        <div className="p-6 bg-gray-100 min-h-screen flex flex-col items-center">
+        <div className="p-6 bg-gradient-to-br from-orange-100 to-red-200 min-h-screen flex flex-col items-center">
             <div className="text-center mb-6">
-                <img src="/logo.png" alt="Restaurant Logo" className="mx-auto w-32" />
-                <h2 className="text-4xl font-bold text-gray-900">Menu for Table {tableId}</h2>
+                <img src="/logo.png" alt="Restaurant Logo" className="mx-auto w-40" />
+                <h2 className="text-4xl font-bold text-gray-900 drop-shadow-md">Hello, Table No.{tableId}</h2>
             </div>
             
-            <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="max-w-5xl w-full">
                 {menu.length > 0 ? (
-                    menu.map((item) => (
-                        <div key={item._id} className="bg-white shadow-lg rounded-xl p-5 flex flex-col items-center hover:shadow-2xl transition duration-300">
-                            <img src={item.image || "/public/images/pizza.jpg"} alt={item.name} className="w-32 h-32 object-cover mb-3 rounded-lg border border-gray-300" />
-                            <strong className="text-lg text-gray-900">{item.name}</strong>
-                            <span className="text-gray-600 mt-1">₹{item.price}</span>
-                            <button 
-                                onClick={() => addToCart(item)} 
-                                className="mt-3 px-5 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition">
-                                Order
-                            </button>
-                        </div>
-                    ))
+                    <>
+                        {Object.entries(
+                            menu.reduce((acc, item) => {
+                                acc[item.category] = [...(acc[item.category] || []), item];
+                                return acc;
+                            }, {})
+                        ).map(([category, items]) => (
+                            <div key={category} className="mb-6">
+                                <h3 className="text-2xl font-semibold text-gray-800 mb-3 border-b-2 pb-2 border-red-400">{category}</h3>
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {items.map((item) => (
+                                        <div key={item._id} className="bg-white shadow-lg rounded-xl p-5 flex flex-col items-center">
+                                            <img src={item.image || "/images/pizza.jpg"} alt={item.name} className="w-44 h-44 object-cover mb-3 rounded-full border border-gray-300" />
+                                            <strong className="text-lg text-gray-900">{item.name}</strong>
+                                            <span className="text-gray-700 mt-1">₹{item.price}</span>
+                                            <div>
+                                            <button 
+                                                onClick={() => addToCart(item)} 
+                                                className="mt-3 mr-2 px-5 py-2 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition">
+                                                Order
+                                            </button>
+                                            <button 
+                                                onClick={() => addToCart(item)} 
+                                                className="mt-3 mr-2 px-4 py-2 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition">
+                                                ingredients
+                                            </button>
+                                            </div>
+                                            
+                    
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </>
                 ) : (
                     <p className="text-center text-gray-600">Loading menu...</p>
                 )}
