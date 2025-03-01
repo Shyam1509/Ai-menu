@@ -1,10 +1,13 @@
 const express = require("express");
-const { getMenu, addMenuItem, deleteMenuItem } = require("../controllers/menuController");
-
 const router = express.Router();
+const { getMenu, addMenuItem, deleteMenuItem } = require("../controllers/menuController");
+const multer = require("multer");
 
+const upload = multer({ dest: "uploads/"});
+
+
+router.post("/add", upload.single("image"), addMenuItem);
 router.get("/get", getMenu);
-router.post("/add", addMenuItem);
 router.delete("/:id", deleteMenuItem);
 
 module.exports = router;

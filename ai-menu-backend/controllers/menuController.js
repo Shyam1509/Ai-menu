@@ -1,4 +1,5 @@
-const Menu = require("../models/menu")
+const Menu = require("../models/menu");
+const cloudinary = require("../config/cloudinary");
 
 // Get all menu items
 exports.getMenu = async (req, res) => {
@@ -16,6 +17,8 @@ exports.addMenuItem = async (req, res) => {
   try {
     const { name, description, price, category } = req.body;
 
+    const result = await cloudinary.uploader.upload(req.file.path);
+
     // Validation
     if (!name || !description || !price || !category) {
       return res.status(400).json({ error: "All fields are required" });
@@ -26,7 +29,13 @@ exports.addMenuItem = async (req, res) => {
       return res.status(400).json({ error: "Price must be a positive number" });
     }
 
-    const newItem = new Menu({ name, description, price, category });
+    const newItem = new Menu({
+      name,
+      description,
+      price,
+      category,
+      image: result.secure_url,
+    });
     await newItem.save();
 
     res.status(201).json({ message: "Menu item added successfully", newItem });
