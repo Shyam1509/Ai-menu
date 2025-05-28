@@ -15,8 +15,8 @@ const QRCodeGenerator = () => {
     setError(null);
     setLoading(true);
     try {
-      // const response = await axios.post("https://ai-menu-0xwb.onrender.com/generate-qr", { tableId });
-      const response = await axios.post("http://localhost:5500/generate-qr", { tableId });
+      const response = await axios.post("https://ai-menu-0xwb.onrender.com/generate-qr", { tableId });
+      // const response = await axios.post("http://localhost:5500/generate-qr", { tableId });
       setQrCode(response.data.qrCode);
     } catch (err) {
       setError("Failed to generate QR Code");
