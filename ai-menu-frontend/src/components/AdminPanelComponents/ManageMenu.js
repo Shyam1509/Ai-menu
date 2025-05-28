@@ -14,7 +14,7 @@ export default function ManageMenu() {
 
     const fetchMenu = async () => {
         try {
-            const res = await fetch("http://localhost:5500/menu/get"); // 🔥 Ensure correct API URL
+            const res = await fetch("https://ai-menu-0xwb.onrender.com/menu/get"); // 🔥 Ensure correct API URL
             const data = await res.json();
             setMenu(data);
         } catch (error) {
