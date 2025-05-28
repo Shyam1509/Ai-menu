@@ -8,9 +8,10 @@ exports.generateQRCode = async (req, res) => {
       return res.status(400).json({ error: "Table ID is required" });
     }
 
-    const qrData = `https://ai-menu-omega.vercel.app/menu/${tableId}`; // Replace with your actual URL
+    // const qrData = `https://ai-menu-omega.vercel.app/menu/${tableId}`; // Development URL
+    const qrData = `http://localhost:3000/menu/${tableId}`; // Production URL
     const qrCode = await QRCode.toDataURL(qrData);
-    console.log()
+    console.log();
     res.status(200).json({ tableId, qrCode });
   } catch (error) {
     console.error("❌ Error generating QR Code:", error);
