@@ -15,7 +15,8 @@ const QRCodeGenerator = () => {
     setError(null);
     setLoading(true);
     try {
-      const response = await axios.post("https://ai-menu-0xwb.onrender.com/generate-qr", { tableId });
+      // const response = await axios.post("https://ai-menu-0xwb.onrender.com/generate-qr", { tableId });
+      const response = await axios.post("http://localhost:5500/generate-qr", { tableId });
       setQrCode(response.data.qrCode);
     } catch (err) {
       setError("Failed to generate QR Code");
@@ -25,7 +26,7 @@ const QRCodeGenerator = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+    <div className="flex flex-col items-center justify-center bg-gray-100 p-4 mt-6">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-semibold text-center mb-4">QR Code Generator</h2>
         <input
