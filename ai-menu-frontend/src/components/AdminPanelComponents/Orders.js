@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:5500", {
+const socket = io("https://ai-menu-0xwb.onrender.com", {
   transports: ["websocket", "polling"], // Allow WebSocket & Polling
   reconnection: true,
   reconnectionAttempts: 10,
